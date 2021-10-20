@@ -5,6 +5,11 @@ namespace TicTacToe
 {
     class Program
     {
+        public static int amountOfEmptyCells = 9;
+        public static char[] field = new char[9];
+        //this array is needed to compare it with indexes in char array
+        public static int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
         static void Main(string[] args)
         {
             Console.BackgroundColor = ConsoleColor.Gray;
@@ -12,14 +17,10 @@ namespace TicTacToe
             Console.ForegroundColor = ConsoleColor.Black;
 
             string exitTheGame = string.Empty;
-            char[] field = new char[9];
-            
+
             while (exitTheGame != "n")
             {
-                //this array is needed to compare it with indexes in char array
-                int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                 int result = 0;
-                int amounOfEmptyCells = 9;
                 exitTheGame = string.Empty;
 
                 //filling a gaming field with numbers
@@ -28,10 +29,10 @@ namespace TicTacToe
 
                 while (true)
                 {
-                    result = PlayerTurn(field, numbers, XO: 'X', "\n  Crosses turn: ", ref amounOfEmptyCells, ConsoleColor.Blue);
+                    result = PlayerTurn('X');
                     if (result == 1 || result == 2 || result == 3) break;
 
-                    result = PlayerTurn(field, numbers, XO: 'O', "\n  Zeroes turn: ", ref amounOfEmptyCells, ConsoleColor.DarkGreen);
+                    result = PlayerTurn('O');
                     if (result == 1 || result == 2 || result == 3) break;
                 }
 
@@ -45,7 +46,15 @@ namespace TicTacToe
                 {
                     Print("  Play again? [y] / [n]: ");
                     exitTheGame = Console.ReadLine();
+                    ResetResults();
                 }
+            }
+
+            void ResetResults()
+            {
+                field = new char[9];
+                amountOfEmptyCells = 9;
+                numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             }
         }
 
@@ -79,7 +88,7 @@ namespace TicTacToe
             }
         }
 
-        public static int PlayerTurn(char[] field, int[] numbers, char XO, string playerTurn, ref int amountOfEmptyCells, ConsoleColor color)
+        public static int PlayerTurn(char XO)
         {
             bool cellIsEmpty = false;
 
@@ -93,7 +102,10 @@ namespace TicTacToe
                 while (input < 1 || input > 9)
                 {
                     DrawGamingField(field);
-                    Print(playerTurn, color);
+                    if (XO == 'X')
+                        Print("\n  Crosses turn: ", ConsoleColor.Blue);
+                    else
+                        Print("\n  Zeroes turn: ", ConsoleColor.DarkGreen);
 
                     int.TryParse(Console.ReadLine(), out input);
                 }
