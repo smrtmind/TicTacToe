@@ -30,10 +30,10 @@ namespace TicTacToe
                 while (true)
                 {
                     result = PlayerTurn('X');
-                    if (result == 1 || result == 2 || result == 3) break;
+                    if (result > 0 && result <= 3) break;
 
                     result = PlayerTurn('O');
-                    if (result == 1 || result == 2 || result == 3) break;
+                    if (result > 0 && result <= 3) break;
                 }
 
                 DrawGamingField(field);
