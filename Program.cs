@@ -88,7 +88,7 @@ namespace TicTacToe
             }
         }
 
-        public static int PlayerTurn(char XO)
+        public static int PlayerTurn(char symbol)
         {
             bool cellIsEmpty = false;
 
@@ -102,7 +102,7 @@ namespace TicTacToe
                 while (input < 1 || input > 9)
                 {
                     DrawGamingField(field);
-                    if (XO == 'X')
+                    if (symbol == 'X')
                         Print("\n  Crosses turn: ", ConsoleColor.Blue);
                     else
                         Print("\n  Zeroes turn: ", ConsoleColor.DarkGreen);
@@ -115,7 +115,7 @@ namespace TicTacToe
                     if (input == numbers[i])
                     {
                         cellIsEmpty = true;
-                        field[i] = XO;
+                        field[i] = symbol;
                         numbers[i] = 0;
 
                         amountOfEmptyCells--;
@@ -132,17 +132,17 @@ namespace TicTacToe
             }
 
             //searching for winning combination
-            if (field[0] == XO && field[1] == XO && field[2] == XO ||
-                field[3] == XO && field[4] == XO && field[5] == XO ||
-                field[6] == XO && field[7] == XO && field[8] == XO ||
-                field[0] == XO && field[3] == XO && field[6] == XO ||
-                field[1] == XO && field[4] == XO && field[7] == XO ||
-                field[2] == XO && field[5] == XO && field[8] == XO ||
-                field[0] == XO && field[4] == XO && field[8] == XO ||
-                field[2] == XO && field[4] == XO && field[6] == XO)
+            if (field[0] == symbol && field[1] == symbol && field[2] == symbol ||
+                field[3] == symbol && field[4] == symbol && field[5] == symbol ||
+                field[6] == symbol && field[7] == symbol && field[8] == symbol ||
+                field[0] == symbol && field[3] == symbol && field[6] == symbol ||
+                field[1] == symbol && field[4] == symbol && field[7] == symbol ||
+                field[2] == symbol && field[5] == symbol && field[8] == symbol ||
+                field[0] == symbol && field[4] == symbol && field[8] == symbol ||
+                field[2] == symbol && field[4] == symbol && field[6] == symbol)
             {
-                if (XO == 'X') return 1;
-                if (XO == 'O') return 2;
+                if (symbol == 'X') return 1;
+                if (symbol == 'O') return 2;
             }
 
             //if there are no more empty cells, it is must be draw
