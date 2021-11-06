@@ -74,7 +74,7 @@ namespace TicTacToe
             foreach (var item in gameField)
             {
                 Print(" |  ", ConsoleColor.DarkMagenta);
-                Print($"{item.ToString()} ");
+                Print($"{item} ");
                 counter++;
 
                 if (counter % 3 == 0)
@@ -124,7 +124,7 @@ namespace TicTacToe
 
                     else if (numbers[input - 1] == 0)
                     {
-                        Print("  this cell is not empty", ConsoleColor.Red);
+                        Print("  this cell is not empty", ConsoleColor.DarkRed);
                         Thread.Sleep(2000);
                         break;
                     }
