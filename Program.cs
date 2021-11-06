@@ -36,15 +36,15 @@ namespace TicTacToe
                     if (result > 0 && result <= 3) break;
                 }
 
-                DrawGamingField(field);
+                Print.GamingField(field);
 
-                if (result == 1) Print("\n  Crosses won\n\n", ConsoleColor.Blue);
-                if (result == 2) Print("\n  Zeroes won\n\n", ConsoleColor.DarkGreen);
-                if (result == 3) Print("\n  Draw\n\n", ConsoleColor.DarkRed);
+                if (result == 1) Print.Text("\n  Crosses won\n\n", ConsoleColor.Blue);
+                if (result == 2) Print.Text("\n  Zeroes won\n\n", ConsoleColor.DarkGreen);
+                if (result == 3) Print.Text("\n  Draw\n\n", ConsoleColor.DarkRed);
 
                 while (exitTheGame != "n" && exitTheGame != "y")
                 {
-                    Print("  Play again? [y] / [n]: ");
+                    Print.Text("  Play again? [y] / [n]: ");
                     exitTheGame = Console.ReadLine();
                     ResetResults();
                 }
@@ -55,36 +55,6 @@ namespace TicTacToe
                 field = new char[9];
                 amountOfEmptyCells = 9;
                 numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            }
-        }
-
-        public static void DrawGamingField(char[] gameField)
-        {
-            Console.Clear();
-
-            //counting three cells in one line, before going to another
-            int counter = 0;
-
-            //controlling that this print will not be printing more than twice
-            int state = 0;
-
-            Print("  _____ _____ _____\n", ConsoleColor.DarkMagenta);
-            Print(" |     |     |     |\n", ConsoleColor.DarkMagenta);
-
-            foreach (var item in gameField)
-            {
-                Print(" |  ", ConsoleColor.DarkMagenta);
-                Print($"{item} ");
-                counter++;
-
-                if (counter % 3 == 0)
-                {
-                    Print(" |", ConsoleColor.DarkMagenta);
-                    Print("\n |_____|_____|_____|\n", ConsoleColor.DarkMagenta);
-                    state++;
-
-                    if (state <= 2) Print(" |     |     |     |\n", ConsoleColor.DarkMagenta);
-                }
             }
         }
 
@@ -101,11 +71,11 @@ namespace TicTacToe
                 //parsing the number to compare it with numbers in array
                 while (input < 1 || input > 9)
                 {
-                    DrawGamingField(field);
+                    Print.GamingField(field);
                     if (symbol == 'X')
-                        Print("\n  Crosses turn: ", ConsoleColor.Blue);
+                        Print.Text("\n  Crosses turn: ", ConsoleColor.Blue);
                     else
-                        Print("\n  Zeroes turn: ", ConsoleColor.DarkGreen);
+                        Print.Text("\n  Zeroes turn: ", ConsoleColor.DarkGreen);
 
                     int.TryParse(Console.ReadLine(), out input);
                 }
@@ -124,7 +94,7 @@ namespace TicTacToe
 
                     else if (numbers[input - 1] == 0)
                     {
-                        Print("  this cell is not empty", ConsoleColor.DarkRed);
+                        Print.Text("  this cell is not empty", ConsoleColor.DarkRed);
                         Thread.Sleep(2000);
                         break;
                     }
@@ -150,13 +120,6 @@ namespace TicTacToe
 
             //otherwise continue playing
             else return -1;
-        }
-
-        public static void Print(string text, ConsoleColor color = ConsoleColor.Black)
-        {
-            Console.ForegroundColor = color;
-            Console.Write(text);
-            Console.ForegroundColor = ConsoleColor.Black;
         }
     }
 }
